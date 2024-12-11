@@ -1,5 +1,6 @@
-using UnityEngine;
+using UnityEngine;  // Assurez-vous d'inclure cette ligne
 using UnityEngine.SceneManagement;
+
 
 public class PongWinUI : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class PongWinUI : MonoBehaviour
 
     PongBall Ball;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Panel.SetActive(false);
@@ -18,26 +18,29 @@ public class PongWinUI : MonoBehaviour
         Ball = GameObject.FindFirstObjectByType<PongBall>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (Ball.State) {
-          case PongBallState.Playing:
-            Panel.SetActive(false);
-            break;
-          case PongBallState.PlayerLeftWin:
-            Panel.SetActive(true);
-            PlayerLeft.SetActive(true);
-            break;
-          case PongBallState.PlayerRightWin:
-            Panel.SetActive(true);
-            PlayerRight.SetActive(true);
-            break;
+            case PongBallState.Playing:
+                Panel.SetActive(false);
+                PlayerLeft.SetActive(false);
+                PlayerRight.SetActive(false);
+                break;
+            case PongBallState.PlayerLeftWin:
+                Panel.SetActive(true);
+                PlayerLeft.SetActive(true);
+                break;
+            case PongBallState.PlayerRightWin:
+                Panel.SetActive(true);
+                PlayerRight.SetActive(true);
+                break;
         }
-       
     }
 
     public void OnReplay() {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        Panel.SetActive(false);
+        PlayerLeft.SetActive(false);
+        PlayerRight.SetActive(false);
     }
 }
